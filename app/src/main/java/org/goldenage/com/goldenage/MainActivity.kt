@@ -16,6 +16,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        graphSettting()
+    }
+
+    fun graphSettting()
+    {
         var entries = mutableListOf<Entry>()
         for (x in -10..10)
         {

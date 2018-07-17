@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         chart.isDoubleTapToZoomEnabled = true
         chart.setDrawGridBackground(false)
         chart.description.isEnabled = false
+        chart.setScaleEnabled(false)
         chart.legend.isEnabled =false
         chart.animateY(2000, Easing.EasingOption.EaseInCubic)
         chart.invalidate()

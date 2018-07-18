@@ -16,19 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setActionBar()
         graphSettting()
-    }
-
-    private fun setActionBar()
-    {
-        var actionbar = supportActionBar!!
-        actionbar.setCustomView(R.layout.custom_action_bar)
-        actionbar.setDisplayShowTitleEnabled(false)
-        actionbar.setDisplayShowCustomEnabled(true)
-        actionbar.setDisplayUseLogoEnabled(false)
-        actionbar.setDisplayShowHomeEnabled(false)
-        actionbar.elevation = 1f
     }
 
     fun graphSettting()
@@ -64,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         var yLAxis = chart.axisLeft
         yLAxis.setDrawGridLines(false)
+        yLAxis.isEnabled = false
         yLAxis.textColor = Color.BLACK
 
         var yRAxis = chart.axisRight

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import org.goldenage.com.goldenage.HowTo.HowToActivity
 
 class SplashActivity : Activity() {
 
@@ -22,7 +21,7 @@ class SplashActivity : Activity() {
             run {
                 Thread.sleep(1000)
                 Handler(Looper.getMainLooper()).post {
-                    var activity = Intent(this, HowToActivity::class.java)
+                    var activity = Intent(this, MainActivity::class.java)
                     startActivity(activity)
                 }
             }

@@ -34,7 +34,8 @@
             android:text="Graph Example"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView2"

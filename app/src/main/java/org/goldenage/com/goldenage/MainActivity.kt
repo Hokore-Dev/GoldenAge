@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -20,6 +21,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         graphSettting()
+        recyclerViewSetting()
+    }
+
+    fun recyclerViewSetting()
+    {
+        recyclerView.adapter = ItemRecyclerViewAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     fun graphSettting()

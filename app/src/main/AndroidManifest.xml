@@ -22,10 +22,6 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity
-            android:name=".HowTo.HowToActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

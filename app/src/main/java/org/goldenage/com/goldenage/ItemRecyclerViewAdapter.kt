@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 
 class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
@@ -26,12 +25,10 @@ class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     }
 
     class CustomViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
-        var imageview: ImageView? = null
         var textview: TextView? = null
 
         init {
-            imageview = view!!.findViewById(R.id.imageView2)
-            textview = view!!.findViewById(R.id.textView4)
+            textview = view!!.findViewById(R.id.info_text)
         }
     }
 }

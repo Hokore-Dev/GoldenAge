@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         dataset.lineWidth = 5f
         dataset.circleRadius = 6f
         dataset.setCircleColor(Color.parseColor("#FFA1B4DC"))
-        dataset.setCircleColorHole(Color.BLUE)
+        dataset.setCircleColorHole(Color.parseColor("#99f2c8"))
         dataset.color = Color.parseColor("#FFA184DC")
         dataset.setDrawCircleHole(true)
         dataset.setDrawCircles(true)

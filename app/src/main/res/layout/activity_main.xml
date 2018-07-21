@@ -16,29 +16,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="50dp"
+            android:id="@+id/button_setting"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginLeft="24dp"
             android:layout_weight="1"
             android:tint="@android:color/white"
             app:srcCompat="@drawable/button_setting" />
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:gravity="center"
-            android:text="Graph Example"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            app:srcCompat="@drawable/title_main" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="50dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginRight="24dp"
             android:layout_weight="1"

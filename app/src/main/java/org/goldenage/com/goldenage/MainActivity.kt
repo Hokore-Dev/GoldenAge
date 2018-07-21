@@ -1,5 +1,6 @@
 package org.goldenage.com.goldenage
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -7,7 +8,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         graphSettting()
         recyclerViewSetting()
+
+        button_setting.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+        }
     }
 
     fun recyclerViewSetting()
@@ -108,7 +112,7 @@ class MainActivity : AppCompatActivity() {
         chart.setScaleEnabled(false)
         chart.extraBottomOffset = -100f
         chart.legend.isEnabled =false
-        chart.animateY(2000, Easing.EasingOption.EaseInCubic)
+        //chart.animateY(2000, Easing.EasingOption.EaseInCubic)
         chart.invalidate()
 
 

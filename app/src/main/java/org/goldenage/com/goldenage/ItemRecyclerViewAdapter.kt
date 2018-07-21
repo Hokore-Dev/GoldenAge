@@ -16,7 +16,7 @@ class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         var view = holder as CustomViewHolder
-        view.textview!!.text = titles[position]
+        //view.textview!!.text = titles[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,7 +28,7 @@ class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         var textview: TextView? = null
 
         init {
-            textview = view!!.findViewById(R.id.info_text)
+            //textview = view!!.findViewById(R.id.info_text)
         }
     }
 }

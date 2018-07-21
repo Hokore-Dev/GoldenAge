@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
@@ -26,8 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     fun recyclerViewSetting()
     {
+        var dividerItemDeco = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        dividerItemDeco.setDrawable(getDrawable(R.drawable.split_line))
+
         recyclerView.adapter = ItemRecyclerViewAdapter()
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(dividerItemDeco)
     }
 
     fun graphSettting()
@@ -78,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         xAxis.textSize = 14f
         xAxis.setDrawGridLines(false)
         xAxis.setDrawAxisLine(false)
-        xAxis.yOffset = -15f
+        xAxis.yOffset = -10f
         //xAxis.enableGridDashedLine(8f, 24f, 0f)
 
         var yLAxis = chart.axisLeft

@@ -18,15 +18,16 @@ import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-
-
-
-
 class MainActivity : AppCompatActivity() {
+
+    var controller : LifeEventController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        controller = LifeEventController()
+        controller!!.loadLifeEvents()
 
         graphSettting()
         recyclerViewSetting()
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 
                     override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                         val position = viewHolder.adapterPosition
+                        controller!!.removeEvent(position)
                         recyclerView.adapter.notifyItemRemoved(position)
                     }
                 })
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         var dividerItemDeco = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         dividerItemDeco.setDrawable(getDrawable(R.drawable.split_line))
 
-        recyclerView.adapter = ItemRecyclerViewAdapter()
+        recyclerView.adapter = ItemRecyclerViewAdapter(controller)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(dividerItemDeco)
     }
@@ -155,7 +157,5 @@ class MainActivity : AppCompatActivity() {
         chart.legend.isEnabled =false
         //chart.animateY(2000, Easing.EasingOption.EaseInCubic)
         chart.invalidate()
-
-
     }
 }

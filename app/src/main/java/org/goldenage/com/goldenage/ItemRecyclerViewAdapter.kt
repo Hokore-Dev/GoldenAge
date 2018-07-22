@@ -6,17 +6,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
+class ItemRecyclerViewAdapter(_controller : LifeEventController?) : RecyclerView.Adapter<RecyclerView.ViewHolder>()
 {
-    var titles = arrayOf("test1", "test2", "test3", "test4","test4","test4","test4","test4","test4","test4","test4","test4","test4","test4")
+    var controller: LifeEventController? = null
+
+    init {
+        controller = _controller
+    }
 
     override fun getItemCount(): Int {
-        return 14
+        if (controller == null)
+            return 0
+
+        return controller!!.getLifeEvents()!!.count()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         var view = holder as CustomViewHolder
-        //view.textview!!.text = titles[position]
+        var list = controller!!.getLifeEvents()!!
+
+        view.textview_desc!!.text = list[position].desc
+        view.textview_age!!.text = list[position].age.toString() + "살"
+        view.textview_month!!.text = list[position].month.toString() + "월"
+        view.textview_satisfaction!!.text = list[position].satisfaction.toString()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,10 +37,16 @@ class ItemRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>()
     }
 
     class CustomViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
-        var textview: TextView? = null
+        var textview_age: TextView? = null
+        var textview_month: TextView? = null
+        var textview_desc: TextView? = null
+        var textview_satisfaction: TextView? = null
 
         init {
-            //textview = view!!.findViewById(R.id.info_text)
+            textview_age = view!!.findViewById(R.id.textView_Age)
+            textview_desc = view!!.findViewById(R.id.textView_Desc)
+            textview_month = view!!.findViewById(R.id.textView_Month)
+            textview_satisfaction = view!!.findViewById(R.id.textView_Satisfaction)
         }
     }
 }

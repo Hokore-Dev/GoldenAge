@@ -6,7 +6,7 @@
         <item name="colorPrimary">#043927</item>
         <item name="colorPrimaryDark">#043927</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">#000</item>
+        <item name="android:statusBarColor">#043927</item>
     </style>
 
     <style name="SplashTheme" parent="@android:style/Theme.Holo.Light.NoActionBar">

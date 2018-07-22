@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             val height = chart.height
 
             val linGrad = LinearGradient(0f, 0f, 0f, height.toFloat(),
-                    Color.parseColor("#99f2c8"),
+                    resources.getColor(android.R.color.holo_green_dark),
                     resources.getColor(android.R.color.holo_red_light),
                     Shader.TileMode.REPEAT)
             paint.shader = linGrad
@@ -85,20 +85,19 @@ class MainActivity : AppCompatActivity() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
         xAxis.textColor = Color.WHITE
         xAxis.textSize = 14f
-        xAxis.setDrawGridLines(false)
+        xAxis.setDrawGridLines(true)
         xAxis.setDrawAxisLine(false)
         xAxis.yOffset = -10f
         //xAxis.enableGridDashedLine(8f, 24f, 0f)
 
         var yLAxis = chart.axisLeft
-        yLAxis.setDrawGridLines(false)
         yLAxis.isEnabled = false
         yLAxis.textColor = Color.BLACK
 
         var yRAxis = chart.axisRight
         yRAxis.setDrawLabels(false)
         yRAxis.setDrawAxisLine(false)
-        yRAxis.setDrawGridLines(false)
+        yRAxis.setDrawGridLines(true)
 
         var marker = MyMarkerView(this, R.layout.test_layout)
         marker.chartView = chart

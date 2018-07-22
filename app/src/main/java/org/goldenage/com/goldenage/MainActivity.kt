@@ -8,11 +8,18 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.ViewHolder
+import android.support.v7.widget.helper.ItemTouchHelper
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.activity_main.*
+
+
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +34,45 @@ class MainActivity : AppCompatActivity() {
         button_setting.setOnClickListener {
             startActivity(Intent(this, SettingActivity::class.java))
         }
+
+        var dm = applicationContext.resources.displayMetrics
+        var width = dm.widthPixels
+        var height = dm.heightPixels
+
+        var dialog = PlusDialog(this)
+        var pm = dialog.window.attributes
+        pm.copyFrom(dialog.window.attributes)
+        pm.width = width / 2
+        pm.height = height / 2
+
+        button_plus.setOnClickListener {
+            dialog.show()
+        }
     }
 
     fun recyclerViewSetting()
     {
+        // 밀어서 삭제
+        val mIth = ItemTouchHelper(
+                object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                        ItemTouchHelper.LEFT) {
+                    override fun onMove(recyclerView: RecyclerView,
+                                                 viewHolder: ViewHolder, target: ViewHolder): Boolean {
+                        val fromPos = viewHolder.adapterPosition
+                        val toPos = target.adapterPosition
+                        // move item in `fromPos` to `toPos` in adapter.
+                        return true// true if moved, false otherwise
+                    }
+
+                    override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                        val position = viewHolder.adapterPosition
+                        recyclerView.adapter.notifyItemRemoved(position)
+                    }
+                })
+
+        mIth.attachToRecyclerView(recyclerView)
+
+        // 구분선
         var dividerItemDeco = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         dividerItemDeco.setDrawable(getDrawable(R.drawable.split_line))
 

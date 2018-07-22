@@ -32,7 +32,7 @@
             app:srcCompat="@drawable/title_main" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/button_plus"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginRight="24dp"
@@ -88,11 +88,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:background="#9d9d9d"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chart"
-        app:srcCompat="@android:color/background_light" />
+        app:layout_constraintTop_toBottomOf="@+id/chart" />
 
 
 </android.support.constraint.ConstraintLayout>

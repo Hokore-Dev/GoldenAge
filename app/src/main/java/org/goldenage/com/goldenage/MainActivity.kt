@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.activity_main.*
@@ -69,6 +68,8 @@ class MainActivity : AppCompatActivity() {
                         val position = viewHolder.adapterPosition
                         controller!!.removeEvent(position)
                         recyclerView.adapter.notifyItemRemoved(position)
+
+                        refreshGraph()
                     }
                 })
 
@@ -83,20 +84,17 @@ class MainActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(dividerItemDeco)
     }
 
+    fun refreshGraph()
+    {
+        chart.xAxis.axisMinimum = controller!!.getMin().toFloat()
+        chart.xAxis.axisMaximum = controller!!.getMax().toFloat()
+
+        chart.notifyDataSetChanged()
+        chart.invalidate()
+    }
+
     fun graphSettting()
     {
-        var entries = mutableListOf<Entry>()
-        entries.add(Entry(0f, 0f))
-        entries.add(Entry(1f, 3f))
-        entries.add(Entry(2f, -3f))
-        entries.add(Entry(3f, 5f))
-        entries.add(Entry(4f, 0f))
-        entries.add(Entry(5f, 2f))
-        entries.add(Entry(6f, 7f))
-        entries.add(Entry(7f, 9f))
-        entries.add(Entry(8f, -2f))
-        entries.add(Entry(9f, 0f))
-
         chart.post {
             val paint = chart.getRenderer().getPaintRender()
             val height = chart.height
@@ -108,11 +106,11 @@ class MainActivity : AppCompatActivity() {
             paint.shader = linGrad
         }
 
-        var dataset = LineDataSet(entries, null)
+        var dataset = LineDataSet(controller!!.getLifeEventEntrys()!!, null)
         dataset.lineWidth = 5f
         dataset.circleRadius = 6f
         dataset.setCircleColor(Color.parseColor("#FFA1B4DC"))
-        dataset.setCircleColorHole(Color.parseColor("#99f2c8"))
+        dataset.setCircleColorHole(android.R.color.holo_green_dark)
         dataset.color = Color.parseColor("#FFA184DC")
         dataset.setDrawCircleHole(true)
         dataset.setDrawCircles(true)
@@ -129,6 +127,7 @@ class MainActivity : AppCompatActivity() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
         xAxis.textColor = Color.WHITE
         xAxis.textSize = 14f
+        xAxis.setDrawLabels(false)
         xAxis.setDrawGridLines(true)
         xAxis.setDrawAxisLine(false)
         xAxis.yOffset = -10f
@@ -137,6 +136,8 @@ class MainActivity : AppCompatActivity() {
         var yLAxis = chart.axisLeft
         yLAxis.isEnabled = false
         yLAxis.textColor = Color.BLACK
+        yLAxis.axisMinimum = -100f
+        yLAxis.axisMaximum = 100f
 
         var yRAxis = chart.axisRight
         yRAxis.setDrawLabels(false)
@@ -147,8 +148,8 @@ class MainActivity : AppCompatActivity() {
         marker.chartView = chart
         chart.marker = marker
 
-        chart.setVisibleXRangeMaximum(5f)
-        chart.moveViewToX(10f)
+        chart.setVisibleXRangeMaximum(110f)
+        //chart.moveViewToX(10f)
         chart.isDoubleTapToZoomEnabled = true
         chart.setDrawGridBackground(false)
         chart.description.isEnabled = false

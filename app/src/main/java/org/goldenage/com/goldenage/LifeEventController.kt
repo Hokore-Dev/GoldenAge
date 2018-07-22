@@ -1,12 +1,44 @@
 package org.goldenage.com.goldenage
 
+import com.github.mikephil.charting.data.Entry
+
 class LifeEventController
 {
     var _lifeEvents : ArrayList<LifeEvent>? = null
+    var _lifeEventEntrys : MutableList<Entry>? = null
 
     fun getLifeEvents() : ArrayList<LifeEvent>?
     {
         return _lifeEvents
+    }
+
+    fun getLifeEventEntrys() : MutableList<Entry>?
+    {
+        _lifeEventEntrys!!.sortWith(object: Comparator<Entry>{
+            override fun compare(o1: Entry?, o2: Entry?): Int = when{
+                o1!!.x > o2!!.x -> 1
+                else -> -1
+            }
+        })
+        return _lifeEventEntrys
+    }
+
+    fun getMin() : Int
+    {
+        if (_lifeEvents!!.isEmpty())
+            return 0
+
+        var event = _lifeEvents!!.first()
+        return event.age * 12 + event.month
+    }
+
+    fun getMax() : Int
+    {
+        if (_lifeEvents!!.isEmpty())
+            return 10
+
+        var event = _lifeEvents!!.last()
+        return event.age * 12 + event.month
     }
 
     /**
@@ -19,8 +51,7 @@ class LifeEventController
 
         _lifeEvents!!.sortWith(object: Comparator<LifeEvent>{
             override fun compare(o1: LifeEvent?, o2: LifeEvent?): Int = when{
-                o1!!.age < o2!!.age -> 1
-                o1!!.month > o2!!.month -> 0
+                (o1!!.age * 12 + o1!!.month) > (o2!!.age * 12 + o2!!.month) -> 1
                 else -> -1
             }
         })
@@ -35,7 +66,9 @@ class LifeEventController
     {
         addLifeEvent(LifeEvent(1,10,"내가 태어남", 100))
         addLifeEvent(LifeEvent(3,2,"검도 메달 땀", 60))
-        addLifeEvent(LifeEvent(10,2,"초등학교 졸업", 70))
+        addLifeEvent(LifeEvent(6,3,"배고파", -60))
+        addLifeEvent(LifeEvent(10,2,"초등학교 졸업", 20))
+        addLifeEvent(LifeEvent(18,10,"선데이토즈 입사", 60))
     }
 
     /**
@@ -47,8 +80,14 @@ class LifeEventController
         if (_lifeEvents == null)
         {
             _lifeEvents = arrayListOf()
+            _lifeEventEntrys = mutableListOf()
         }
+
+        var x = lifeEvent.age.toFloat() * 12 + lifeEvent.month.toFloat()
+        var y = lifeEvent.satisfaction.toFloat()
+
         _lifeEvents!!.add(lifeEvent)
+        _lifeEventEntrys!!.add(Entry(x, y))
         alignmentEvents()
     }
 
@@ -61,6 +100,7 @@ class LifeEventController
         if (_lifeEvents != null && !_lifeEvents!!.isEmpty())
         {
             _lifeEvents!!.removeAt(position)
+            _lifeEventEntrys!!.removeAt(position)
         }
     }
 

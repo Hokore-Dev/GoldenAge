@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         var width = dm.widthPixels
         var height = dm.heightPixels
 
-        var dialog = PlusDialog(this)
+        var dialog = PlusDialog(this, controller)
         var pm = dialog.window.attributes
         pm.copyFrom(dialog.window.attributes)
         pm.width = width / 2
@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
 
         button_plus.setOnClickListener {
             dialog.show()
+        }
+
+        dialog.setOnDismissListener {
+            recyclerView.adapter.notifyDataSetChanged()
+            refreshGraph()
         }
     }
 

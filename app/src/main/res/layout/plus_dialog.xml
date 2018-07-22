@@ -8,7 +8,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="330dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -45,14 +45,14 @@
                 android:textColor="@android:color/darker_gray" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editText_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:hint="여기에 기록해주세요"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="고등학교 졸업!" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -70,29 +70,34 @@
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal">
 
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="80dp"
+                <EditText
+                    android:id="@+id/editText_Age"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="살" />
 
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="80dp"
+                <EditText
+                    android:id="@+id/editText_Month"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:text="월" />
             </LinearLayout>
@@ -114,6 +119,8 @@
 
                 <SeekBar
                     android:id="@+id/seekBar"
+                    android:min="0"
+                    android:max="200"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -124,13 +131,13 @@
                     android:thumb="@drawable/seekbar_thumb" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/textView_seekbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:layout_weight="5"
-                    android:text="12"
-                    android:textAlignment="center" />
+                    android:text="0"
+                    android:textAlignment="textStart" />
 
             </LinearLayout>
 
@@ -156,7 +163,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/button6"
+                        android:id="@+id/button_cancel"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -175,7 +182,7 @@
                         app:srcCompat="@android:color/darker_gray" />
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/button_add"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -14,12 +14,6 @@ class LifeEventController
 
     fun getLifeEventEntrys() : MutableList<Entry>?
     {
-        _lifeEventEntrys!!.sortWith(object: Comparator<Entry>{
-            override fun compare(o1: Entry?, o2: Entry?): Int = when{
-                o1!!.x > o2!!.x -> 1
-                else -> -1
-            }
-        })
         return _lifeEventEntrys
     }
 
@@ -39,6 +33,22 @@ class LifeEventController
 
         var event = _lifeEvents!!.last()
         return event.age * 12 + event.month
+    }
+
+    /**
+     * 이벤트를 정렬함
+     */
+    fun alignmentEntryEvents()
+    {
+        if (_lifeEventEntrys == null)
+            return
+
+        _lifeEventEntrys!!.sortWith(object: Comparator<Entry>{
+            override fun compare(o1: Entry?, o2: Entry?): Int = when{
+                o1!!.x > o2!!.x -> 1
+                else -> -1
+            }
+        })
     }
 
     /**
@@ -89,6 +99,7 @@ class LifeEventController
         _lifeEvents!!.add(lifeEvent)
         _lifeEventEntrys!!.add(Entry(x, y))
         alignmentEvents()
+        alignmentEntryEvents()
     }
 
     /**

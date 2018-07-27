@@ -1,5 +1,6 @@
 package org.goldenage.com.goldenage
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,16 @@ class ItemRecyclerViewAdapter(_controller : LifeEventController?) : RecyclerView
         view.textview_desc!!.text = list[position].desc
         view.textview_age!!.text = list[position].age.toString() + "살"
         view.textview_month!!.text = list[position].month.toString() + "월"
+
+        var color : Color? = null
+        if (list[position].satisfaction > 50)
+        {
+            view.textview_satisfaction!!.setTextColor(Color.GREEN)
+        }
+        else if (list[position].satisfaction < -50)
+        {
+            view.textview_satisfaction!!.setTextColor(Color.RED)
+        }
         view.textview_satisfaction!!.text = list[position].satisfaction.toString()
     }
 

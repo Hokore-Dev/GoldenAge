@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
 import android.widget.SeekBar
+import android.widget.Toast
 import kotlinx.android.synthetic.main.plus_dialog.*
 
 class PlusDialog(_context : Context, _controller : LifeEventController?) : Dialog(_context)
@@ -47,12 +48,23 @@ class PlusDialog(_context : Context, _controller : LifeEventController?) : Dialo
 
     fun addEvent()
     {
-        controller!!.addLifeEvent(LifeEvent(
-                editText_Age.text.toString().toInt(),
-                editText_Month.text.toString().toInt(),
-                editText_desc.text.toString(),
-                seekBar.progress - 100
-        ))
+        var age = editText_Age.text.toString().toInt()
+        var month = editText_Month.text.toString().toInt()
+        var desc = editText_desc.text.toString()
+
+        if (age < 0 || age > 200)
+        {
+            Toast.makeText(context, "나이는 0살 ~ 200살 사이를 입력해주세요",Toast.LENGTH_LONG).show()
+            return
+        }
+
+        if (month < 1 || month > 12)
+        {
+            Toast.makeText(context, "1월과 12월 사이를 입력해주세요", Toast.LENGTH_LONG).show()
+            return
+        }
+
+        controller!!.addLifeEvent(LifeEvent(age, month, desc, seekBar.progress - 100))
 
         dismiss()
     }

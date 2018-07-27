@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -25,7 +26,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        controller = LifeEventController()
+        var sharedPerferences = PreferenceManager.getDefaultSharedPreferences(this)
+
+        controller = LifeEventController(sharedPerferences)
         controller!!.loadLifeEvents()
 
         graphSettting()

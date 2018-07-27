@@ -1,11 +1,19 @@
 package org.goldenage.com.goldenage
 
+import android.content.SharedPreferences
 import com.github.mikephil.charting.data.Entry
+import org.json.JSONArray
+import org.json.JSONObject
 
-class LifeEventController
+class LifeEventController(preference : SharedPreferences)
 {
     var _lifeEvents : ArrayList<LifeEvent>? = null
     var _lifeEventEntrys : MutableList<Entry>? = null
+    var _preference : SharedPreferences? = null
+
+    init {
+        _preference = preference
+    }
 
     fun getLifeEvents() : ArrayList<LifeEvent>?
     {
@@ -69,16 +77,55 @@ class LifeEventController
 
     /**
      * 로컬에 저장된 이벤트를 불러온다
-     * @TODO minjun.ha 로드 테스트 코드 추가함
      * @return List<LifeEvent>? 로드된 이벤트 목록
      */
     public fun loadLifeEvents()
     {
-        addLifeEvent(LifeEvent(1,10,"내가 태어남", 100))
-        addLifeEvent(LifeEvent(3,2,"검도 메달 땀", 60))
-        addLifeEvent(LifeEvent(6,3,"배고파", -60))
-        addLifeEvent(LifeEvent(10,2,"초등학교 졸업", 20))
-        addLifeEvent(LifeEvent(18,10,"선데이토즈 입사", 60))
+        var jsonData = _preference!!.getString("json", "")
+        if (jsonData == "")
+        {
+            addLifeEvent(LifeEvent(1,10,"내가 태어남", 50))
+            addLifeEvent(LifeEvent(3,5,"첫 걸음마", 75))
+            saveToJSON()
+        }
+        else
+        {
+            jsonToEvent(jsonData)
+        }
+    }
+
+    /**
+     * 이벤트를 JSON 데이터화 시킨다
+     */
+    public fun saveToJSON()
+    {
+        var jsonArray = JSONArray()
+        for (event in _lifeEvents!!)
+        {
+            var eventJson = JSONObject()
+            eventJson.put("age", event.age)
+            eventJson.put("month", event.month)
+            eventJson.put("desc", event.desc)
+            eventJson.put("satisfaction", event.satisfaction)
+            jsonArray.put(eventJson)
+        }
+        var root = JSONObject()
+        root.put("array", jsonArray)
+        _preference!!.edit().putString("json", root.toString()).commit()
+    }
+
+    /**
+     * JSON 데이터를 이벤트로 변경한다
+     */
+    public fun jsonToEvent(jsonData : String)
+    {
+        var root  = JSONObject(jsonData)
+        var array = root.getJSONArray("array")
+        for (i in 0..(array.length() - 1))
+        {
+            var json = array.getJSONObject(i)
+            addLifeEvent(LifeEvent(json.getInt("age"), json.getInt("month"), json.getString("desc"), json.getInt("satisfaction")))
+        }
     }
 
     /**
@@ -100,6 +147,8 @@ class LifeEventController
         _lifeEventEntrys!!.add(Entry(x, y))
         alignmentEvents()
         alignmentEntryEvents()
+
+        saveToJSON()
     }
 
     /**
@@ -112,6 +161,8 @@ class LifeEventController
         {
             _lifeEvents!!.removeAt(position)
             _lifeEventEntrys!!.removeAt(position)
+
+            saveToJSON()
         }
     }
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "540459050107",
+    "firebase_url": "https://drawlife-2a235.firebaseio.com",
+    "project_id": "drawlife-2a235",
+    "storage_bucket": "drawlife-2a235.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540459050107:android:ee3b2a7086d9ac57",
+        "android_client_info": {
+          "package_name": "org.goldenage.com.goldenage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540459050107-9rn1df22o19i0vj1se4b15fndfjn56l2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.goldenage.com.goldenage",
+            "certificate_hash": "4f394c128d1a84a151da0fa70414fedd1b8c18b0"
+          }
+        },
+        {
+          "client_id": "540459050107-nh994uco6kesni4al06abk5018n4gm0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwdL2mQF2HuCqTlDsxXFptjy6DJJ8l2bA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540459050107-nh994uco6kesni4al06abk5018n4gm0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

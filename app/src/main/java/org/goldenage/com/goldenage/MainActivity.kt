@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     var controller : LifeEventController? = null
+    var backPressedTime : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                                                  viewHolder: ViewHolder, target: ViewHolder): Boolean {
                         val fromPos = viewHolder.adapterPosition
                         val toPos = target.adapterPosition
+
                         // move item in `fromPos` to `toPos` in adapter.
                         return true// true if moved, false otherwise
                     }
@@ -166,5 +168,21 @@ class MainActivity : AppCompatActivity() {
         chart.legend.isEnabled =false
         //chart.animateY(2000, Easing.EasingOption.EaseInCubic)
         chart.invalidate()
+    }
+
+    override fun onBackPressed() {
+        var time = System.currentTimeMillis()
+        var intervalTime = time - backPressedTime
+
+        if (0 <= intervalTime && 2000 >= intervalTime)
+        {
+            finishAffinity()
+            System.runFinalization()
+            System.exit(0)
+        }
+        else
+        {
+            backPressedTime = time;
+        }
     }
 }

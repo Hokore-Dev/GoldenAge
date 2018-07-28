@@ -82,6 +82,7 @@ class LifeEventController(preference : SharedPreferences)
     public fun loadLifeEvents()
     {
         var jsonData = _preference!!.getString("json", "")
+        jsonData = ""
         if (jsonData == "")
         {
             addLifeEvent(LifeEvent(1,10,"내가 태어남", 50))

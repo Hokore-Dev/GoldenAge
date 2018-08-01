@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     var controller : LifeEventController? = null
     var backPressedTime : Long = 0
+    var itemTouchHelper : ItemTouchHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,13 +57,18 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnDismissListener {
             recyclerView.adapter.notifyDataSetChanged()
             refreshGraph()
+
+            if (controller!!.getLifeEvents()!!.count() > 1)
+            {
+                itemTouchHelper!!.attachToRecyclerView(recyclerView)
+            }
         }
     }
 
     fun recyclerViewSetting()
     {
         // 밀어서 삭제
-        val mIth = ItemTouchHelper(
+        itemTouchHelper = ItemTouchHelper(
                 object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN,
                         ItemTouchHelper.LEFT) {
                     override fun onMove(recyclerView: RecyclerView,
@@ -80,10 +86,15 @@ class MainActivity : AppCompatActivity() {
                         recyclerView.adapter.notifyItemRemoved(position)
 
                         refreshGraph()
+
+                        if (controller!!.getLifeEvents()!!.count() <= 1)
+                        {
+                            itemTouchHelper!!.attachToRecyclerView(null)
+                        }
                     }
                 })
 
-        mIth.attachToRecyclerView(recyclerView)
+        itemTouchHelper!!.attachToRecyclerView(recyclerView)
 
         // 구분선
         var dividerItemDeco = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
